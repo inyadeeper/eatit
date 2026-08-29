@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XexeX Records — Two Catalogs. One Rope.</title>
+<meta name="description" content="XexeX Records: Gallows Ballads (dark country / folk-horror) and a heavier metal catalog. Independent, Suno-built, gallows-strung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://gumroad.com/js/gumroad.js"></script>
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #e8dcc0;
+    --bg-raised: #ddcda8;
+    --ink: #201509;
+    --ink-muted: #5c4a30;
+    --accent-rust: #8c3524;
+    --accent-brass: #8a6423;
+    --line: #b8a173;
+    --rope: #6b573a;
+    --shadow: rgba(32,21,9,0.18);
+    --font-display: 'Rye', serif;
+    --font-body: 'Spectral', serif;
+    --font-mono: 'Special Elite', monospace;
+  }
+  html[data-theme="dark"]{
+    --bg: #16110d;
+    --bg-raised: #1f1811;
+    --ink: #e9dfc7;
+    --ink-muted: #a89678;
+    --accent-rust: #b1502f;
+    --accent-brass: #c9a054;
+    --line: #3a2f22;
+    --rope: #8a7452;
+    --shadow: rgba(0,0,0,0.55);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background .4s ease, color .4s ease;
+    overflow-x: hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  a{ color: inherit; }
+
+  h1,h2,h3{
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-brass);
+  }
+
+  /* ============ ROPE SPINE (signature element) ============ */
+  .rope-spine{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 100vh;
+    z-index: 5;
+    pointer-events: none;
+    mix-blend-mode: normal;
+  }
+  .rope-spine svg{ height: 100%; width: 100%; overflow: visible; }
+  .rope-line{
+    stroke: var(--rope);
+    stroke-width: 3;
+    fill: none;
+    opacity: 0.55;
+  }
+  .rope-notch{
+    fill: var(--bg-raised);
+    stroke: var(--rope);
+    stroke-width: 1.5;
+    transition: fill .5s ease, stroke .5s ease;
+  }
+  .rope-notch.lit{
+    fill: var(--accent-rust);
+    stroke: var(--accent-brass);
+  }
+  @media (max-width: 720px){
+    .rope-spine{ left: 14px; transform: none; width: 4px; }
+  }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ HEADER / THEME TOGGLE ============ */
+  .topbar{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 18px 24px;
+    z-index: 10;
+  }
+  .theme-toggle{
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--bg-raised);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .3s ease, transform .15s ease;
+  }
+  .theme-toggle:hover{ transform: translateY(-1px); }
+  .theme-toggle:focus-visible{ outline: 2px solid var(--accent-rust); outline-offset: 2px; }
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 28px 60px;
+  }
+  .hero .eyebrow{ margin-bottom: 22px; }
+  .hero h1{
+    font-size: clamp(2.6rem, 8vw, 5.2rem);
+    line-height: 0.98;
+    color: var(--ink);
+  }
+  .hero h1 span{ display:block; color: var(--accent-rust); }
+  .hero .tagline{
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    color: var(--ink-muted);
+    margin-top: 22px;
+    max-width: 34ch;
+  }
+  .hero-cta{
+    margin-top: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-rust);
+    padding-bottom: 4px;
+    transition: opacity .3s ease;
+  }
+  .hero-cta:hover{ opacity: 0.7; }
+
+  /* ============ CHAPTER SECTIONS ============ */
+  .chapter{
+    padding: 100px 0 40px;
+    border-top: 1px solid var(--line);
+  }
+  .chapter-head{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .chapter-head h2{
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+  }
+  .chapter-desc{
+    color: var(--ink-muted);
+    max-width: 52ch;
+    font-size: 1.02rem;
+  }
+
+  .ledger{
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px -12px var(--shadow);
+  }
+  .ledger-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 22px;
+    border-bottom: 1px dashed var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+  }
+  .ledger-row:last-child{ border-bottom: none; }
+  .ledger-title{ color: var(--ink); }
+  .ledger-tag{ color: var(--accent-brass); white-space: nowrap; font-size: 0.78rem; }
+  .ledger-empty{
+    padding: 22px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    font-style: normal;
+  }
+
+  .chapter-cta{
+    margin-top: 30px;
+    display: inline-block;
+  }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent-rust);
+    color: #f2e9d5;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform .15s ease, filter .3s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.1); }
+  .btn:focus-visible{ outline: 2px solid var(--accent-brass); outline-offset: 3px; }
+  .btn.ghost{
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+
+  /* ============ FOLLOW SECTION ============ */
+  .follow{
+    padding: 90px 0 100px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .follow h2{ font-size: clamp(1.6rem, 4vw, 2.2rem); }
+  .follow p{ color: var(--ink-muted); max-width: 46ch; margin: 16px auto 34px; }
+  .follow-form{
+    display: flex;
+    gap: 10px;
+    max-width: 420px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .follow-input{
+    flex: 1 1 220px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 13px 16px;
+    border-radius: 2px;
+  }
+  .follow-input:focus-visible{ outline: 2px solid var(--accent-rust); outline-offset: 2px; }
+  .follow-message{
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-brass);
+    min-height: 1.2em;
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    padding: 34px 0 60px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  footer a{ text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 600px){
+    .wrap{ padding: 0 20px; }
+    .ledger-row{ flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="rope-spine" aria-hidden="true">
+  <svg viewBox="0 0 6 1000" preserveAspectRatio="none" id="ropeSvg">
+    <path class="rope-line" d="M3,0 L3,1000"></path>
+    <!-- 13 notches injected by JS -->
+  </svg>
+</div>
+
+<div class="topbar">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">Light Mode</button>
+</div>
+
+<main>
+
+  <section class="hero">
+    <div class="eyebrow">Independent · Suno-Built · Gallows-Strung</div>
+    <h1>XexeX Records<span>Two Catalogs. One Rope.</span></h1>
+    <p class="tagline">Dark country ballads and heavier riffs, cut from the same length of rope.</p>
+    <a href="#chapter-i" class="hero-cta">Enter the Catalog ↓</a>
+  </section>
+
+  <section class="chapter wrap" id="chapter-i">
+    <div class="chapter-head">
+      <div class="eyebrow">Chapter I</div>
+      <h2>Gallows Ballads</h2>
+      <p class="chapter-desc">Dark country and folk-horror. Shrinking verses, rubato tempo, minimal instrumentation, and enough silence to hear the trapdoor.</p>
+    </div>
+    <div class="ledger">
+      <div class="ledger-row">
+        <span class="ledger-title">I'm the Hangin' Man</span>
+        <span class="ledger-tag">gallows ballad</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-title">Whiskey and the Rope</span>
+        <span class="ledger-tag">gallows ballad</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-title">The Noose and a Nickel</span>
+        <span class="ledger-tag">gallows ballad</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-title">Thirteen Steps</span>
+        <span class="ledger-tag">64 bpm</span>
+      </div>
+    </div>
+    <a href="https://shanemickley.gumroad.com/l/REPLACE-GALLOWS-BALLADS-SLUG" class="btn chapter-cta gumroad-button">Listen on Gumroad</a>
+  </section>
+
+  <section class="chapter wrap" id="chapter-ii">
+    <div class="chapter-head">
+      <div class="eyebrow">Chapter II</div>
+      <h2>The Metal Catalog</h2>
+      <p class="chapter-desc">Riff-driven and aggressive, built for a vocal delivery that sits between a sermon and a threat.</p>
+    </div>
+    <div class="ledger">
+      <div class="ledger-empty">Tracklist in the works — check back for the first entries.</div>
+    </div>
+    <a href="https://shanemickley.gumroad.com/l/REPLACE-METAL-SLUG" class="btn chapter-cta gumroad-button">Listen on Gumroad</a>
+  </section>
+
+  <section class="follow wrap">
+    <div class="eyebrow">Stay on the List</div>
+    <h2>Join the Following</h2>
+    <p>New releases, first listens, no noise. One email when the rope drops.</p>
+    <form class="follow-form" id="followForm" data-gumroad-follow>
+      <input class="follow-input" type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+      <button type="submit" class="btn">Follow</button>
+    </form>
+    <div class="follow-message" data-gumroad-follow-message></div>
+  </section>
+
+</main>
+
+<footer>
+  <div>XexeX Records — <a href="https://shanemickley.gumroad.com" target="_blank" rel="noopener">shanemickley.gumroad.com</a></div>
+</footer>
+
+<script>
+  // ---- Theme toggle ----
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('xexex-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = stored || (prefersDark ? 'dark' : 'light');
+  applyTheme(initial);
+
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('xexex-theme', next);
+  });
+
+  function applyTheme(mode){
+    if(mode === 'dark'){
+      root.setAttribute('data-theme', 'dark');
+      toggle.textContent = 'Dark Mode';
+    } else {
+      root.removeAttribute('data-theme');
+      toggle.textContent = 'Light Mode';
+    }
+  }
+
+  // ---- Rope spine: 13 notches, lighting up on scroll ----
+  const svg = document.getElementById('ropeSvg');
+  const NOTCH_COUNT = 13;
+  const notches = [];
+  for(let i = 0; i < NOTCH_COUNT; i++){
+    const y = (i + 0.5) * (1000 / NOTCH_COUNT);
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', '3');
+    c.setAttribute('cy', y.toFixed(1));
+    c.setAttribute('r', '5');
+    c.setAttribute('class', 'rope-notch');
+    svg.appendChild(c);
+    notches.push(c);
+  }
+
+  function updateRope(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+    const litCount = Math.round(progress * NOTCH_COUNT);
+    notches.forEach((n, i) => {
+      n.classList.toggle('lit', i < litCount);
+    });
+  }
+  window.addEventListener('scroll', updateRope, { passive: true });
+  window.addEventListener('resize', updateRope);
+  updateRope();
+</script>
+
+</body>
+</html>
